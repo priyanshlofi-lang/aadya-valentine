@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aadya 💕 Valentine</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ffe6f0, #f3e8ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #ff4d88;
+    }
+
+    h2 {
+      margin-top: 10px;
+      font-weight: 400;
+      color: #555;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      padding: 14px 30px;
+      font-size: 1rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      position: absolute;
+    }
+
+    #yesBtn {
+      background: #ff5fa2;
+      color: white;
+      left: 50%;
+      transform: translateX(-120%);
+    }
+
+    #noBtn {
+      background: #fff;
+      color: #ff5fa2;
+      left: 50%;
+      transform: translateX(20%);
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.6;
+    }
+
+    .yes-screen {
+      display: none;
+      animation: fadeIn 1s ease;
+    }
+
+    .yes-screen h1 {
+      font-size: 2.4rem;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0.7; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.6); }
+      to { transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" id="mainScreen">
+    <h1>Aadya Negi 💕</h1>
+    <h2>Will you be my Valentine? 💌</h2>
+
+    <div class="buttons">
+      <button id="yesBtn">YES 💖</button>
+      <button id="noBtn">NO 🙅‍♀️</button>
+    </div>
+  </div>
+
+  <div class="container yes-screen" id="yesScreen">
+    <h1>Yayyy Aadya 🥹💘</h1>
+    <h2>You are my Valentine ❤️</h2>
+  </div>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2>Best decision ever, Aadya 😘🌹</h2>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const mainScreen = document.getElementById("mainScreen");
+    const yesScreen = document.getElementById("yesScreen");
+    const popup = document.getElementById("popup");
+
+    const noTexts = ["Nice try 😜","Nope 😏","You can’t say no 😌","Hehe 😆"];
+
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+      noBtn.innerText = noTexts[Math.floor(Math.random() * noTexts.length)];
+    }
+
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+
+    yesBtn.addEventListener("click", () => {
+      mainScreen.style.display = "none";
+      yesScreen.style.display = "block";
+      setTimeout(() => popup.style.display = "flex", 800);
+    });
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 15 + 15 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
